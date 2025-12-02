@@ -1,0 +1,70 @@
+/* NAVBAR */
+
+.navbar {
+  width: 100%;
+  padding: 15px 30px;
+  background: #020617;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 300;
+  color: #e5e7eb;
+}
+
+.navbar-right a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #cbd5f5;
+  font-weight: 400;
+}
+
+.navbar-right a:hover,
+.navbar-right .active {
+  color: #38bdf8;
+}
+
+.logout-btn {
+  margin-left: 20px;
+  background: #ef4444;
+  border: none;
+  padding: 8px 16px;
+  color: #fff;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* MAIN: MUY IMPORTANTE -> que sea ancho completo */
+
+.main-container {
+  margin-top: 30px;
+  padding: 0 24px 32px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block; /* no FLEX */
+}

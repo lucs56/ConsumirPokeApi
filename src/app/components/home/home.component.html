@@ -1,0 +1,65 @@
+<!-- HERO / BUSCADOR -->
+<section class="hero">
+  <div class="hero-card">
+    <h1>Busca tu Pokémon</h1>
+    <p>Ingresa el nombre o el ID, o explora la lista de abajo.</p>
+
+    <div class="search-row">
+      <input
+        type="text"
+        placeholder="Ej: pikachu o 25"
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="search()"
+      />
+      <button (click)="search()">Buscar</button>
+    </div>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+  </div>
+</section>
+
+<!-- RESULTADO INDIVIDUAL -->
+<section *ngIf="pokemon" class="result-section">
+  <div class="pokemon-card">
+    <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
+
+    <div class="info">
+      <h2>
+        {{ pokemon.name | titlecase }}
+        <span>{{ '#' + pokemon.id }}</span>
+      </h2>
+
+      <p class="types">
+        Tipo:
+        <span *ngFor="let t of pokemon.types">{{ t.type.name }}</span>
+      </p>
+
+      <button (click)="addToFavorites()" [disabled]="isSaving">
+        {{ isSaving ? 'Guardando...' : 'Agregar a favoritos' }}
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- LISTADO DE TODOS LOS POKÉMON -->
+<section class="list-section">
+  <h2>Explorá todos los Pokémon</h2>
+
+  <div class="list-grid">
+    <div class="list-card" *ngFor="let p of pokemonList">
+      <img [src]="p.image" [alt]="p.name" />
+      <h3>{{ p.name | titlecase }}</h3>
+      <p class="id">{{ '#' + p.id }}</p>
+
+      <button (click)="selectFromList(p)">
+        Ver
+      </button>
+    </div>
+  </div>
+
+  <div class="load-more">
+    <button (click)="loadMore()" [disabled]="loadingList">
+      {{ loadingList ? 'Cargando...' : 'Cargar más' }}
+    </button>
+  </div>
+</section>

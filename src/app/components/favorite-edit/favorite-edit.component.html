@@ -1,0 +1,28 @@
+<div class="edit-card">
+  <h2>Editar favorito</h2>
+
+  <p *ngIf="loading">Cargando...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <ng-container *ngIf="!loading && favorite">
+    <div class="fav-header">
+      <img [src]="favorite.image" [alt]="favorite.name" />
+      <div>
+        <h3>{{ favorite.name | titlecase }}</h3>
+        <p class="types">
+          <span *ngFor="let t of favorite.types">{{ t }}</span>
+        </p>
+      </div>
+    </div>
+
+    <label>
+      Nota / Alias
+      <textarea [(ngModel)]="favorite.note" rows="3"></textarea>
+    </label>
+
+    <div class="actions">
+      <button (click)="onSave()">Guardar</button>
+      <button class="secondary" routerLink="/favorites">Cancelar</button>
+    </div>
+  </ng-container>
+</div>

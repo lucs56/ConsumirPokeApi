@@ -1,0 +1,25 @@
+<div class="auth-card">
+  <h2>Iniciar sesión</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <label>
+      Email
+      <input type="email" name="email" [(ngModel)]="email" required />
+    </label>
+
+    <label>
+      Contraseña
+      <input type="password" name="password" [(ngModel)]="password" required minlength="6" />
+    </label>
+
+    <button type="submit" [disabled]="loginForm.invalid">
+      Entrar
+    </button>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+    <p class="hint">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Regístrate aquí</a>
+    </p>
+  </form>
+</div>

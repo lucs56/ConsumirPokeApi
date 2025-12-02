@@ -1,0 +1,248 @@
+/* HERO / BUSCADOR */
+
+.hero {
+  margin-top: 1rem;
+}
+
+.hero-card {
+  background: radial-gradient(circle at top left, #1d4ed8, #020617);
+  padding: 1.7rem 1.9rem;
+  border-radius: 1.5rem;
+  border: 1px solid #1d4ed8;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.7);
+  color: #e5e7eb;
+}
+
+.hero-card h1 {
+  margin: 0 0 0.4rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.hero-card p {
+  margin: 0 0 1rem;
+  color: #d1d5db;
+}
+
+.search-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-row input {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  border: none;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.search-row input::placeholder {
+  color: #9ca3af;
+}
+
+.search-row button {
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: #facc15;
+  color: #1f2937;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.search-row button:hover {
+  background: #eab308;
+  transform: translateY(-1px);
+}
+
+.error {
+  color: #fecaca;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* RESULTADO INDIVIDUAL (CARD GRANDE) */
+
+.result-section {
+  margin-top: 2rem;
+}
+
+.pokemon-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: #020617;
+  border-radius: 1.75rem;
+  padding: 1.75rem 2rem;
+  border: 1px solid #1f2937;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+  color: #e5e7eb;
+}
+
+.pokemon-card img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  background: #0b1120;
+  border-radius: 1.25rem;
+}
+
+.info {
+  flex: 1;
+}
+
+.info h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.info h2 span {
+  font-size: 1rem;
+  color: #a5b4fc;
+  margin-left: 0.35rem;
+}
+
+.types {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.types span {
+  display: inline-block;
+  margin-right: 0.4rem;
+  margin-top: 0.3rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at top, #1d4ed8, #0f172a);
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.info button {
+  margin-top: 1.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: #22c55e;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.info button:hover:not(:disabled) {
+  background: #16a34a;
+  transform: translateY(-1px);
+}
+
+.info button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* LISTADO DE TODOS LOS POKÉMON (GRID) */
+
+.list-section {
+  margin-top: 2.5rem;
+}
+
+.list-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+/* grilla responsive: 1–4 columnas según ancho */
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* tarjeta de cada pokémon de la grilla */
+.list-card {
+  background: #020617;
+  border-radius: 1.25rem;
+  padding: 1.3rem 1rem;
+  border: 1px solid #1f2937;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s;
+}
+
+.list-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+}
+
+.list-card img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  background: #0b1120;
+  border-radius: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.list-card h3 {
+  margin: 0.25rem 0;
+  font-size: 1.1rem;
+  color: #f9fafb;
+}
+
+.list-card .id {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.list-card button {
+  margin-top: 0.7rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: #38bdf8;
+  color: #0f172a;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.list-card button:hover {
+  background: #0ea5e9;
+}
+
+/* BOTÓN CARGAR MÁS */
+
+.load-more {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.load-more button {
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: #4b5563;
+  color: #e5e7eb;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.load-more button:hover:not(:disabled) {
+  background: #6b7280;
+}
+
+.load-more button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

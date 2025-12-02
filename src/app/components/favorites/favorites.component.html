@@ -1,0 +1,29 @@
+<section class="fav-wrapper">
+  <h2>Mis Pokémon favoritos</h2>
+
+  <p *ngIf="loading">Cargando...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="empty" *ngIf="!loading && favorites.length === 0 && !error">
+    Aún no tienes favoritos. Ve a la página de inicio y agrega alguno.
+  </div>
+
+  <div class="grid" *ngIf="favorites.length > 0">
+    <div class="card" *ngFor="let fav of favorites">
+      <img [src]="fav.image" [alt]="fav.name" />
+
+      <div class="info">
+        <h3>{{ fav.name | titlecase }}</h3>
+        <p class="types">
+          <span *ngFor="let t of fav.types">{{ t }}</span>
+        </p>
+        <p class="note" *ngIf="fav.note">Nota: {{ fav.note }}</p>
+
+        <div class="actions">
+          <button (click)="editFavorite(fav)">Editar</button>
+          <button class="danger" (click)="deleteFavorite(fav)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
