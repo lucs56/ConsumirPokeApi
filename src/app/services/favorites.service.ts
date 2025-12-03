@@ -1,43 +1,44 @@
 import { Injectable } from '@angular/core';
-import { db } from '../firebase.config';
 import {
   collection,
   addDoc,
+  deleteDoc,
+  updateDoc,
+  doc,
   query,
   where,
   onSnapshot,
-  updateDoc,
-  deleteDoc,
-  doc,
-  getDoc
+  getDoc,
 } from 'firebase/firestore';
-import { FavoritePokemon } from '../models/favorite-pokemon.model';
 import { Observable } from 'rxjs';
+import { db } from '../firebase.config';
+import { FavoritePokemon } from '../models/favorite-pokemon.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoritesService {
-  private collectionName = 'favorites';
+  private collectionRef = collection(db, 'favorites');
 
   constructor() {}
 
-  addFavorite(fav: FavoritePokemon): Promise<void> {
-    const colRef = collection(db, this.collectionName);
-    return addDoc(colRef, fav).then(() => {});
+  // 👉 Coincide con lo que hacías en home.component.ts:
+  //    this.favoritesService.addFavorite(fav);
+  addFavorite(fav: FavoritePokemon): Promise<any> {
+    return addDoc(this.collectionRef, fav);
   }
 
+  // Listar favoritos de un usuario (Observable para el componente)
   getFavoritesByUser(userId: string): Observable<FavoritePokemon[]> {
-    return new Observable<FavoritePokemon[]>((subscriber) => {
-      const colRef = collection(db, this.collectionName);
-      const q = query(colRef, where('userId', '==', userId));
+    const q = query(this.collectionRef, where('userId', '==', userId));
 
+    return new Observable<FavoritePokemon[]>((subscriber) => {
       const unsubscribe = onSnapshot(
         q,
         (snapshot) => {
-          const data = snapshot.docs.map((d) => ({
-            id: d.id,
-            ...(d.data() as FavoritePokemon)
+          const data = snapshot.docs.map((docSnap) => ({
+            id: docSnap.id,
+            ...(docSnap.data() as FavoritePokemon),
           }));
           subscriber.next(data);
         },
@@ -48,24 +49,28 @@ export class FavoritesService {
     });
   }
 
+  // Obtener un favorito por ID (para la pantalla de editar)
   async getFavoriteById(id: string): Promise<FavoritePokemon | null> {
-    const docRef = doc(db, this.collectionName, id);
-    const snap = await getDoc(docRef);
+    const ref = doc(db, 'favorites', id);
+    const snap = await getDoc(ref);
+
     if (!snap.exists()) return null;
 
     return {
       id: snap.id,
-      ...(snap.data() as FavoritePokemon)
+      ...(snap.data() as FavoritePokemon),
     };
   }
 
-  async updateFavorite(id: string, data: Partial<FavoritePokemon>): Promise<void> {
-    const docRef = doc(db, this.collectionName, id);
-    await updateDoc(docRef, data as any);
+  // Actualizar un favorito
+  updateFavorite(id: string, data: Partial<FavoritePokemon>): Promise<void> {
+    const ref = doc(db, 'favorites', id);
+    return updateDoc(ref, data as any);
   }
 
-  async deleteFavorite(id: string): Promise<void> {
-    const docRef = doc(db, this.collectionName, id);
-    await deleteDoc(docRef);
+  // Eliminar un favorito
+  deleteFavorite(id: string): Promise<void> {
+    const ref = doc(db, 'favorites', id);
+    return deleteDoc(ref);
   }
 }

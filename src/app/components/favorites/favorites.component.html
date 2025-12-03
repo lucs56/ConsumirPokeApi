@@ -13,11 +13,27 @@
       <img [src]="fav.image" [alt]="fav.name" />
 
       <div class="info">
-        <h3>{{ fav.name | titlecase }}</h3>
+        <!-- Si tiene alias, se muestra el alias grande -->
+        <h3>
+          {{ fav.alias || (fav.name | titlecase) }}
+        </h3>
+
+        <!-- Si hay alias, mostramos debajo el nombre original -->
+        <p class="original-name" *ngIf="fav.alias">
+          Nombre original: {{ fav.name | titlecase }}
+        </p>
+
         <p class="types">
           <span *ngFor="let t of fav.types">{{ t }}</span>
         </p>
-        <p class="note" *ngIf="fav.note">Nota: {{ fav.note }}</p>
+
+        <p class="meta" *ngIf="fav.category">
+          Categoría: {{ fav.category }}
+        </p>
+
+        <p class="note" *ngIf="fav.note">
+          Nota: {{ fav.note }}
+        </p>
 
         <div class="actions">
           <button (click)="editFavorite(fav)">Editar</button>

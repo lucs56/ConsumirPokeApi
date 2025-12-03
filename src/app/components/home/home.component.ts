@@ -67,11 +67,12 @@ export class HomeComponent implements OnInit {
     this.isSaving = true;
 
     const fav: FavoritePokemon = {
+      userId,
       pokemonId: this.pokemon.id,
       name: this.pokemon.name,
       image: this.pokemon.sprites.front_default,
-      types: this.pokemon.types.map((t) => t.type.name),
-      userId
+      types: this.pokemon.types.map((t: any) => t.type.name),
+      note: null
     };
 
     try {

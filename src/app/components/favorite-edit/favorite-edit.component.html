@@ -1,28 +1,61 @@
-<div class="edit-card">
-  <h2>Editar favorito</h2>
+<section class="edit-wrapper">
+  <div class="edit-card" *ngIf="!loading && favorite; else loadingTpl">
+    <h2>Editar favorito</h2>
 
-  <p *ngIf="loading">Cargando...</p>
-  <p class="error" *ngIf="error">{{ error }}</p>
-
-  <ng-container *ngIf="!loading && favorite">
-    <div class="fav-header">
-      <img [src]="favorite.image" [alt]="favorite.name" />
+    <div class="header">
+      <img [src]="favorite!.image" [alt]="favorite!.name" />
       <div>
-        <h3>{{ favorite.name | titlecase }}</h3>
+        <h3>{{ favorite!.name | titlecase }}</h3>
         <p class="types">
-          <span *ngFor="let t of favorite.types">{{ t }}</span>
+          <span *ngFor="let t of favorite!.types">{{ t }}</span>
         </p>
       </div>
     </div>
 
-    <label>
-      Nota / Alias
-      <textarea [(ngModel)]="favorite.note" rows="3"></textarea>
-    </label>
+    <form (ngSubmit)="save()" class="edit-form">
+      <div class="form-group">
+        <label for="alias">Alias / Apodo</label>
+        <input
+          id="alias"
+          type="text"
+          [(ngModel)]="alias"
+          name="alias"
+          placeholder="Ej: Tanque principal, Mi starter, etc."
+        />
+      </div>
 
-    <div class="actions">
-      <button (click)="onSave()">Guardar</button>
-      <button class="secondary" routerLink="/favorites">Cancelar</button>
-    </div>
-  </ng-container>
-</div>
+      <div class="form-group">
+        <label for="category">Categoría / Rol</label>
+        <input
+          id="category"
+          type="text"
+          [(ngModel)]="category"
+          name="category"
+          placeholder="Ej: Equipo A, Especial, Tanque..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="note">Nota</label>
+        <textarea
+          id="note"
+          rows="3"
+          [(ngModel)]="note"
+          name="note"
+          placeholder="Escribe una nota sobre este Pokémon"
+        ></textarea>
+      </div>
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <div class="actions">
+        <button type="submit" class="primary">Guardar</button>
+        <button type="button" class="secondary" (click)="cancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template #loadingTpl>
+    <p class="loading">Cargando...</p>
+  </ng-template>
+</section>

@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, NgIf, NgFor, RouterLink],
+  imports: [CommonModule, NgIf, NgFor],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.css']
 })
